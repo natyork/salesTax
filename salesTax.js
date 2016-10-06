@@ -69,3 +69,5 @@ function calculateSalesTax(salesData, taxRates) {
   return finalObj;
 }
 console.log(calculateSalesTax(companySalesData,salesTaxRates));
+
+//lovingly coded by nat and brett
