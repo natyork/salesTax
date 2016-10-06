@@ -1,3 +1,4 @@
+
 var salesTaxRates = {
   AB: 0.05,
   BC: 0.12,
@@ -23,20 +24,48 @@ var companySalesData = [
 ];
 
 function calculateSalesTax(salesData, taxRates) {
-  // Implement your code here
-}
 
-var results = salesTaxReport(companySalesData, salesTaxRates);
+  for (var index of salesData) {
 
-/* Expected Results:
-{
-  Telus: {
-    totalSales: 1300
-    totalTaxes: 144
-  },
-  Bombardier: {
-    totalSales: 800,
-    totalTaxes: 40
+    var companyName = index.name;
+    var subTotal = add(index.sales)
+    index.subTotal = subTotal;
   }
+  for (var index of salesData) {
+
+    var province = index.province;
+    var taxRate = salesTaxRates[province];
+
+
+
+    var subTax = (taxRate * index.subTotal);
+    index.subTax = subTax;
+
+    // Uncomment this to see full array of
+    // updated companySalesData
+    //console.log(index);
+
+  }
+
+  function add(salesArray) {
+    var total = 0;
+    for (var i in salesArray) {
+      total+= salesArray[i];
+    }
+    return total;
+  }
+
+  var finalObj = {};
+  for (var index of salesData) {
+    if (!finalObj[index.name]) {
+      finalObj[index.name] = {};
+      finalObj[index.name].totalSales = 0;
+      finalObj[index.name].totalTaxes = 0;
+    }
+      finalObj[index.name].totalSales += index.subTotal;
+      finalObj[index.name].totalTaxes += index.subTax;
+
+  }
+  return finalObj;
 }
-*/
+console.log(calculateSalesTax(companySalesData,salesTaxRates));
